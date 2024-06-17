@@ -3,6 +3,7 @@
 //  YouAreAwesome
 //
 //  Created by Mark McBride on 6/16/24.
+//  Last Update by Mark McBride on 6/17/24.
 //
 
 import SwiftUI
@@ -24,19 +25,16 @@ struct ContentView: View {
             
             Spacer()
             
-            HStack {
-                Button("Awesome") {
-                    messageString = "You Are Awesome"
+            Button("Show Message") {
+                let message1 = "You Are Awesome!"
+                let message2 = "You Are Great!"
+                if messageString == message1 {
+                    messageString = message2
+                } else {
+                    messageString = message1
                 }
-                .buttonStyle(.borderedProminent)
-                
-                Spacer()
-                
-                Button("Great") {
-                    messageString = "You Are Great"
-                }
-                .buttonStyle(.borderedProminent)
             }
+            .buttonStyle(.borderedProminent)
             .padding()
         }
     }
