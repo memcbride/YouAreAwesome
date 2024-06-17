@@ -10,8 +10,18 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var messageString  = ""
+    @State private var imageName = ""
+    
     var body: some View {
         VStack {
+            
+            Image(imageName)
+                .resizable()
+                .scaledToFit()
+                .cornerRadius(30)
+                .shadow(radius: 30)
+                .padding()
+            
             Spacer()
             
             Text(messageString)
@@ -28,7 +38,10 @@ struct ContentView: View {
             Button("Show Message") {
                 let message1 = "You Are Awesome!"
                 let message2 = "You Are Great!"
+                let image0 = "image0"
+                let image1 = "image1"
                 messageString = (messageString == message1 ? message2 : message1)
+                imageName = (imageName == image0 ? image1 : image0)
 //                if messageString == message1 {
 //                    messageString = message2
 //                } else {
