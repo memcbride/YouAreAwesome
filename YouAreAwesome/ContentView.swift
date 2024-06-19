@@ -10,21 +10,12 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var messageString  = ""
-    @State private var messageNumber = 0
+    @State private var lastMessageNumber = -1
     @State private var imageName = ""
-    @State private var imageNumber = 0
+    @State private var lastImageNumber = -1
     
     var body: some View {
         VStack {
-            
-            Image(imageName)
-                .resizable()
-                .scaledToFit()
-                .cornerRadius(30)
-                .shadow(radius: 30)
-                .padding()
-            
-            Spacer()
             
             Text(messageString)
                 .font(.largeTitle)
@@ -35,6 +26,14 @@ struct ContentView: View {
                 .frame(height: 150)
                 .frame(maxWidth: .infinity)
             
+            
+            Image(imageName)
+                .resizable()
+                .scaledToFit()
+                .cornerRadius(30)
+                .shadow(radius: 30)
+                .padding()
+            
             Spacer()
             
             Button("Show Message") {
@@ -43,9 +42,20 @@ struct ContentView: View {
                                 "Fabulous? That's You!",
                                 "You Are Fantastic!",
                                 "You Are Swifty"]
-                messageString = messages[Int.random(in: 0...messages.count-1)]
-                imageName = "image\(Int.random(in: 0...9))"
-           }
+                var messageNumber: Int
+                repeat {
+                    messageNumber = Int.random(in: 0...messages.count-1)
+                } while lastMessageNumber == messageNumber
+                lastMessageNumber = messageNumber
+                messageString = messages[messageNumber]
+                
+                var imageNumber: Int
+                repeat {
+                    imageNumber = Int.random(in: 0...9)
+                } while lastImageNumber == imageNumber
+                lastImageNumber = imageNumber
+                imageName = "image\(imageNumber)"
+            }
             .buttonStyle(.borderedProminent)
             .padding()
         }
